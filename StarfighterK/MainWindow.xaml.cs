@@ -100,13 +100,10 @@ namespace StarfighterK
             canvas1.Children.Clear();
             //Check input and move starfighter
             _fighterController.CheckInput(_starfighter);
-            //Maybe move this into the Fly method
+            
             _starfighter.Draw(canvas1, _starshipY);
             _tunnel.Fly(canvas1, _starshipY);
 
-            //messageText.Text = string.Format("Left:{0} Right{1}", ((KinectController) _fighterController).left.Y,
-            //                                 ((KinectController) _fighterController).right.Y);
-            //    canvas1.Children.Add(messageText);
             //CHeck if collided and run game over
             if(_starfighter.CheckCollision(_tunnel.Walls[0]))
             {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Research.Kinect.Nui;
@@ -83,13 +84,14 @@ namespace StarfighterK
             }
         }
 
+        public Image video = new Image();
         void nui_ColorFrameReady(object sender, ImageFrameReadyEventArgs e)
         {
             //Draws video from camera
             // 32-bit per pixel, RGBA image
-            //PlanarImage Image = e.ImageFrame.Image;
-            //video.Source = BitmapSource.Create(
-            //    Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel);
+            PlanarImage Image = e.ImageFrame.Image;
+            video.Source = BitmapSource.Create(
+                Image.Width, Image.Height, 96, 96, PixelFormats.Bgr32, null, Image.Bits, Image.Width * Image.BytesPerPixel);
         }
 
 
