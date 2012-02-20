@@ -12,6 +12,8 @@ namespace StarfighterK
         /// </summary>
         public int Width { get; set; }
         public int X { get; set; }
+        public double Left { get { return X - Width; } }
+        public double Right { get { return X + Width - 4; } }
         private BitmapImage _spriteBitmap = new BitmapImage(new Uri("/Resources/Wall.png", UriKind.Relative));
         private bool _goLeft;
 
