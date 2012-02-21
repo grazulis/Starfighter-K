@@ -8,9 +8,9 @@
     <Grid>
         <Canvas Height="320" HorizontalAlignment="Left" Name="canvas1" Width="640" Background="Black" >
             <TextBlock Canvas.Left="196" Canvas.Top="89" Height="100" Name="messageText" Text="TextBlock" Width="258" Foreground="#FF1BFF00" FontFamily="Consolas" FontSize="30" TextAlignment="Center" />
-        
         </Canvas>
-        <Image Name="video" HorizontalAlignment="Right" Width="186" VerticalAlignment="Top" Height="93" Source="/Resources/Wall.png" />
-
+        <Image Name="video" HorizontalAlignment="Right" Width="180" VerticalAlignment="Top" Height="90" />
+        <TextBlock FontFamily="Consolas" FontSize="30" Foreground="#FF1BFF00" Name="score" Text="TextBlock" TextAlignment="Center" Margin="643,144,0,-2" />
+        <TextBlock FontFamily="Consolas" FontSize="30" Foreground="#FF1BFF00" Name="scoretitle" Text="SCORE" TextAlignment="Center" Margin="663,103,12,180" />
     </Grid>
 </Window>

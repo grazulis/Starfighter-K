@@ -112,22 +112,29 @@ namespace StarfighterK
 
         public Vector left = new Vector();
         public Vector right = new Vector();
+        public Vector centre = new Vector();
+
         public void CheckInput(Starfighter starfighter)
         {
             CheckPlayers();
             if (players.Count > 0)
             {
-
+                //Better to link starship to single player and acquire through skeletonid
+                //but this will do for testing
                 foreach (var player in players)
                 {
                    
                     left = player.Value.GetJointPosition(JointID.HandLeft);
                     right = player.Value.GetJointPosition(JointID.HandRight);
+                    centre = player.Value.GetJointPosition(JointID.ShoulderCenter);
                 }
 
 
                 if (left.Y > right.Y - 0.15 ) MoveRight(starfighter);
                 if (left.Y < right.Y + 0.15 ) MoveLeft(starfighter);
+
+                if (left.Z < (centre.Z - 0.2) && right.Z < (centre.Z - 0.2)) DecreaseSpeed(starfighter);
+                if (left.Z > (centre.Z + 0.2) && right.Z > (centre.Z + 0.2)) IncreaseSpeed(starfighter);
 
 
             }

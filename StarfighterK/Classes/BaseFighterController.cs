@@ -4,7 +4,7 @@ namespace StarfighterK
     {
         public void IncreaseSpeed(Starfighter starfighter)
         {
-            if (starfighter.Speed < 40)
+            if (starfighter.Speed < 30)
                 starfighter.Speed += 5;
         }
 

@@ -39,7 +39,7 @@ namespace StarfighterK
         private double _starshipY = 0;
 
         private Tunnel _tunnel;
-        
+        private int _score;
         
         #endregion
 
@@ -104,17 +104,28 @@ namespace StarfighterK
             _starfighter.Draw(canvas1, _starshipY);
             _tunnel.Fly(canvas1, _starshipY);
 
+            IncrementScore();
+
             //Update Video
             video.Source = _fighterController.GetType() == typeof (KinectController)
                         ? ((KinectController) _fighterController).video.Source
                         : video.Source;
-            
 
-            //CHeck if collided and run game over
+            //messageText.Text = string.Format("L:{0} R:{1}", ((KinectController) _fighterController).left.Z,
+            //                                 ((KinectController) _fighterController).right.Z);
+            //canvas1.Children.Add(messageText);
+            //CHeck if collided and run game over))
             if (_starfighter.CheckCollision(_tunnel.Walls[0]))
             {
                 GameOver();
             }
+        }
+
+        private void IncrementScore()
+        {
+            if (_starfighter != null) _score += (int)_starfighter.Speed;
+            score.Text = string.Format("{0}", _score);
+            //canvas1.Children.Add(score);
         }
 
         private void GameOver()
