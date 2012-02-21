@@ -34,8 +34,8 @@ namespace StarfighterK
         private const int MinFramerate = 2;
 
         private readonly Starfighter _starfighter = new Starfighter();
-        // readonly IFighterController _fighterController = new KeyboardController();
-        private readonly IFighterController _fighterController = new KinectController();
+         readonly IFighterController _fighterController = new KeyboardController();
+        //private readonly IFighterController _fighterController = new KinectController();
         private double _starshipY = 0;
 
         private Tunnel _tunnel;

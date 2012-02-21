@@ -32,8 +32,8 @@ namespace StarfighterK
         public bool CheckCollision(Wall wall)
         {
             //TODO Add properties to wall to calculate position of left and right wall
-            return (X > wall.Left )
-                || (X < wall.Right )
+            return (X < wall.Left )
+                || (X > wall.Right )
                 ;
         }
     }
