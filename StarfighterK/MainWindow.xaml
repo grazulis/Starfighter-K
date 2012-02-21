@@ -4,14 +4,13 @@
         Title="MainWindow" Height="357" Width="845"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        Closed="Window_Closed"
-        >
+        Closed="Window_Closed" Background="Black">
     <Grid>
         <Canvas Height="320" HorizontalAlignment="Left" Name="canvas1" Width="640" Background="Black" >
             <TextBlock Canvas.Left="196" Canvas.Top="89" Height="100" Name="messageText" Text="TextBlock" Width="258" Foreground="#FF1BFF00" FontFamily="Consolas" FontSize="30" TextAlignment="Center" />
         
         </Canvas>
-        <Image Name="video" Opacity="0.4" HorizontalAlignment="Right" Width="167" VerticalAlignment="Top" Height="93" />
+        <Image Name="video" HorizontalAlignment="Right" Width="186" VerticalAlignment="Top" Height="93" Source="/Resources/Wall.png" />
 
     </Grid>
 </Window>
