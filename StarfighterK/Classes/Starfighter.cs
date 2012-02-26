@@ -3,10 +3,12 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using StarfighterK.Properties;
 
 namespace StarfighterK
 {
+    /// <summary>
+    /// The Starfighter
+    /// </summary>
     public class Starfighter
     {
         private readonly BitmapImage _spriteBitmap = new BitmapImage(new Uri("/Resources/Ship.png", UriKind.Relative));

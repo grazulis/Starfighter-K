@@ -5,6 +5,9 @@ using System.Windows.Media.Imaging;
 
 namespace StarfighterK
 {
+    /// <summary>
+    /// The wall object is a single segment of the tunnel with a wall at each side
+    /// </summary>
     public class Wall
     {
         /// 

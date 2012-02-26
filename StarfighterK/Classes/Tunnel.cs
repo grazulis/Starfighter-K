@@ -11,7 +11,7 @@ namespace StarfighterK
             Walls = new List<Wall>();
             for (int i = 0; i < 20; i++)
             {
-                Walls.Add(new Wall { Width = 200, X= 320});
+                Walls.Add(new Wall { Width = 130, X= 320});
             }
         }
 

@@ -1,8 +1,12 @@
-using System;
+
 using System.Windows.Input;
 
 namespace StarfighterK
 {
+    /// <summary>
+    /// A keyboard controller for the starfighter
+    /// which can be used for testing purposes
+    /// </summary>
     public class KeyboardController : BaseFighterController, IFighterController
     {
         public void CheckInput(Starfighter starfighter)

@@ -1,5 +1,9 @@
 namespace StarfighterK
 {
+    /// <summary>
+    /// The base controller class with the implmenentation
+    /// for the basic starfighter controls.
+    /// </summary>
     public class BaseFighterController
     {
         public void IncreaseSpeed(Starfighter starfighter)

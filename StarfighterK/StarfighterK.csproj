@@ -69,7 +69,6 @@
     <Compile Include="Classes\KeyboardController.cs" />
     <Compile Include="Classes\KinectController.cs" />
     <Compile Include="Classes\Player.cs" />
-    <Compile Include="Classes\PlayerUtils.cs" />
     <Compile Include="Classes\Starfighter.cs" />
     <Compile Include="Classes\Tunnel.cs" />
     <Compile Include="Classes\Wall.cs" />
