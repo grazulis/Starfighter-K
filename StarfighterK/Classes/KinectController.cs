@@ -132,7 +132,9 @@ namespace StarfighterK
 
                 //THis starts the flight once the player exists and has raised hands 
                 //(well, moved them far enough from centre)
-                if(starfighter.Speed == 0 && left.X < centre.X - 0.4 && right.X > centre.X + 0.4)
+                //Although this is a fixed width and prob ought to be calculated
+                //based upon player height.
+                if(starfighter.Speed == 0 && left.X < centre.X - 0.2 && right.X > centre.X + 0.2)
                 {
                     starfighter.Speed = 20;
                 }
