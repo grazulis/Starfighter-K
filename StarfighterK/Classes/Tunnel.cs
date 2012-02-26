@@ -11,7 +11,7 @@ namespace StarfighterK
             Walls = new List<Wall>();
             for (int i = 0; i < 20; i++)
             {
-                Walls.Add(new Wall { Width = 130, X= 320});
+                Walls.Add(new Wall { Width = 200, X= 320});
             }
         }
 
@@ -24,7 +24,7 @@ namespace StarfighterK
 
         private enum Move{Left, Straight, Right}
 
-        private int _directionLength = 20;
+        private int _directionLength = 30;
         private int _directionCounter = 0;
         private Random _random = new Random();
         private Move _direction = Move.Straight;

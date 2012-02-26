@@ -7,47 +7,44 @@ namespace StarfighterK
 {
     public class Wall
     {
+        /// 
+        
+        public Wall()
+        {
+            _leftImage.Source = _spriteBitmap;
+            _rightImage.Source = _spriteBitmap;
+        }
+
         /// <summary>
         /// Width from centre line to wall in pixels
         /// </summary>
         public int Width { get; set; }
+
+        /// <summary>
+        /// The location of the mid-point between the walls
+        /// </summary>
         public int X { get; set; }
         public double Left { get { return X - Width; } }
         public double Right { get { return X + Width - 4; } }
         private BitmapImage _spriteBitmap = new BitmapImage(new Uri("/Resources/Wall.png", UriKind.Relative));
-        private bool _goLeft;
+
+        private readonly Image _leftImage =
+            new Image();
+
+        private readonly Image _rightImage =
+            new Image();
 
         public void Draw(double wallY, Canvas playfield)
         {
+            playfield.Children.Add(_leftImage);
+            playfield.Children.Add(_rightImage);
 
-            var leftImage =
-                  new Image { Source = _spriteBitmap, Visibility = Visibility.Visible};
+            Canvas.SetLeft(_leftImage, X-(Width));
+            Canvas.SetTop(_leftImage, wallY );
 
-            var rightImage =
-                  new Image { Source = _spriteBitmap, Visibility = Visibility.Visible };
+            Canvas.SetLeft(_rightImage, X+(Width));
+            Canvas.SetTop(_rightImage, wallY );
 
-                playfield.Children.Add(leftImage);
-            playfield.Children.Add(rightImage);
-
-            Canvas.SetLeft(leftImage, X-(Width));
-            Canvas.SetTop(leftImage, wallY );
-
-            Canvas.SetLeft(rightImage, X+(Width));
-            Canvas.SetTop(rightImage, wallY );
-
-            //This is temporary, needs to inherit xy from previous and 
-            //be managed in the tnnel code.
-            //if(_goLeft)
-            //{
-            //    X--;
-            //    _goLeft = X >= 50;
-            //}
-            //else
-            //{
-            //    X++;
-            //    _goLeft = X >= 250;
-            //}
-            
         }
         
     }

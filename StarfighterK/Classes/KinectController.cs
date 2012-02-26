@@ -119,6 +119,7 @@ namespace StarfighterK
             CheckPlayers();
             if (players.Count > 0)
             {
+                
                 //Better to link starship to single player and acquire through skeletonid
                 //but this will do for testing
                 foreach (var player in players)
@@ -129,6 +130,12 @@ namespace StarfighterK
                     centre = player.Value.GetJointPosition(JointID.ShoulderCenter);
                 }
 
+                //THis starts the flight once the player exists and has raised hands 
+                //(well, moved them far enough from centre)
+                if(starfighter.Speed == 0 && left.X < centre.X - 0.4 && right.X > centre.X + 0.4)
+                {
+                    starfighter.Speed = 20;
+                }
 
                 if (left.Y > right.Y - 0.15 ) MoveRight(starfighter);
                 if (left.Y < right.Y + 0.15 ) MoveLeft(starfighter);

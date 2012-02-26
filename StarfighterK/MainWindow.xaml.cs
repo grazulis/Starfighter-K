@@ -26,7 +26,7 @@ namespace StarfighterK
         #region variables
         bool _runningGameThread = true;
         DateTime _predNextFrame = DateTime.Now;
-        //private double targetFramerate = _starfighter.Speed;
+        private double targetFramerate = 20;
         double _actualFrameTime;
         private DateTime _lastFrameDrawn;
         private int _frameCount;
@@ -56,12 +56,13 @@ namespace StarfighterK
             gameThread.Start();
         }
 
-        
+
         private void GameThread()
         {
             _runningGameThread = true;
             _predNextFrame = DateTime.Now;
-            _actualFrameTime = 1000.0 / _starfighter.Speed;
+
+            _actualFrameTime = 1000.0/targetFramerate;
 
             // Try to dispatch at as constant of a framerate as possible by sleeping just enough since
             // the last time we dispatched.
@@ -72,13 +73,13 @@ namespace StarfighterK
                 if (_lastFrameDrawn == DateTime.MinValue)
                     _lastFrameDrawn = now;
                 double ms = now.Subtract(_lastFrameDrawn).TotalMilliseconds;
-                _actualFrameTime = _actualFrameTime * 0.95 + 0.05 * ms;
+                _actualFrameTime = _actualFrameTime*0.95 + 0.05*ms;
                 _lastFrameDrawn = now;
 
                 // Adjust target framerate down if we're not achieving that rate
                 _frameCount++;
-                if (((_frameCount % 100) == 0) && (1000.0 / _actualFrameTime < _starfighter.Speed * 0.92))
-                    _starfighter.Speed = Math.Max(MinFramerate, (_starfighter.Speed + 1000.0 / _actualFrameTime) / 2);
+                //if (((_frameCount%100) == 0) && (1000.0/_actualFrameTime < targetFramerate*0.92) && (_starfighter.Speed > _actualFrameTime))
+                //    targetFramerate = Math.Max(MinFramerate, (targetFramerate + 1000.0/_actualFrameTime)/2);
 
                 if (now > _predNextFrame)
                     _predNextFrame = now;
@@ -86,38 +87,48 @@ namespace StarfighterK
                 {
                     double msSleep = _predNextFrame.Subtract(now).TotalMilliseconds;
                     if (msSleep >= TimerResolution)
-                        Thread.Sleep((int)(msSleep + 0.5));
+                        Thread.Sleep((int) (msSleep + 0.5));
                 }
-                _predNextFrame += TimeSpan.FromMilliseconds(1000.0 / _starfighter.Speed);
+                _predNextFrame += TimeSpan.FromMilliseconds(1000.0/targetFramerate);
 
                 Dispatcher.Invoke(DispatcherPriority.Send,
-                    new Action<int>(HandleGameTimer), 0);
+                                  new Action<int>(HandleGameTimer), 0);
             }
         }
 
+
         private void HandleGameTimer(int param)
         {
-            canvas1.Children.Clear();
             //Check input and move starfighter
             _fighterController.CheckInput(_starfighter);
-            
-            _starfighter.Draw(canvas1, _starshipY);
-            _tunnel.Fly(canvas1, _starshipY);
 
-            IncrementScore();
-
-            //Update Video
-            video.Source = _fighterController.GetType() == typeof (KinectController)
-                        ? ((KinectController) _fighterController).video.Source
-                        : video.Source;
-
-            //messageText.Text = string.Format("L:{0} R:{1}", ((KinectController) _fighterController).left.Z,
-            //                                 ((KinectController) _fighterController).right.Z);
-            //canvas1.Children.Add(messageText);
-            //CHeck if collided and run game over))
-            if (_starfighter.CheckCollision(_tunnel.Walls[0]))
+            if (_starfighter.Speed > 0)
             {
-                GameOver();
+                if (_starfighter.Speed > 0)
+                {
+                    targetFramerate = _starfighter.Speed;
+                }
+
+                canvas1.Children.Clear();
+
+                _starfighter.Draw(canvas1, _starshipY);
+                _tunnel.Fly(canvas1, _starshipY);
+
+                IncrementScore();
+
+                //Update Video
+                video.Source = _fighterController.GetType() == typeof (KinectController)
+                                   ? ((KinectController) _fighterController).video.Source
+                                   : null;
+
+                //messageText.Text = string.Format("FR:{0} AR:{1} SR:{2}", targetFramerate, _actualFrameTime, _starfighter.Speed);
+                //canvas1.Children.Add(messageText);
+                
+                //CHeck if collided and run game over))
+                if (_starfighter.CheckCollision(_tunnel.Walls[0]))
+                {
+                    GameOver();
+                }
             }
         }
 
@@ -138,7 +149,7 @@ namespace StarfighterK
         public void SetupScreen()
         {
 
-            _starfighter.Speed = 20;
+            _starfighter.Speed = 0;
             _starfighter.X = canvas1.Width/2;
             _starshipY = canvas1.Height - 30;
 
