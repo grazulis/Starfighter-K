@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -10,7 +11,7 @@ namespace StarfighterK
             Walls = new List<Wall>();
             for (int i = 0; i < 20; i++)
             {
-                Walls.Add(new Wall { Width = 180, X= 320});
+                Walls.Add(new Wall { Width = 130, X= 320});
             }
         }
 
@@ -20,6 +21,13 @@ namespace StarfighterK
         {
             MoveWall(starshipY+16, playfield);
         }
+
+        private enum Move{Left, Straight, Right}
+
+        private int _directionLength = 20;
+        private int _directionCounter = 0;
+        private Random _random = new Random();
+        private Move _direction = Move.Straight;
 
         private bool _goLeft;
         private void MoveWall(double wallY, Canvas playfield)
@@ -35,31 +43,57 @@ namespace StarfighterK
                 }
                 else
                 {
+                    if(_directionCounter >= _directionLength)
+                    {
+                        ChangeDirection();
+                    }
+
                     CheckEdgeCollision(wall, playfield.ActualWidth - 8);
 
-                    if(_goLeft)
+                    if(_direction == Move.Left)
                     {
                         wall.X = wall.X - 8;
                         
                     }
-                    else
+                    else if (_direction == Move.Right)
                     {
                         wall.X = wall.X + 8;
                     }
                 }
             }
+            _directionCounter++;
+        }
+
+        private void ChangeDirection()
+        {
+            var _rndValue = _random.Next(10);
+            if(_rndValue < 2)
+            {
+                _direction = Move.Straight;
+            }
+            else if (_rndValue < 6)
+            {
+                _direction = Move.Left;
+            }
+            else
+            {
+                _direction = Move.Right;
+            }
+
+            _directionCounter = 0;
+            _directionLength = _random.Next(20);
         }
 
         private void CheckEdgeCollision(Wall wall, double tunnelWidth)
         {
-            if(wall.X + wall.Width >= tunnelWidth)
+            if (wall.X + wall.Width >= tunnelWidth && _direction == Move.Right)
             {
-                _goLeft = true;
+                _direction = Move.Left;
 
-            }else if (wall.X- wall.Width <= 0)
+            }
+            else if (wall.X - wall.Width <= 0 && _direction == Move.Left)
             {
-                _goLeft = false;
-
+                _direction = Move.Right;
             }
         }
     }
