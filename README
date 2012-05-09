@@ -1,5 +1,5 @@
 Starfighter-K is a very old-style tunnel game, based on an old ASCII game, designed to work with the Kinect.
-Built using the MS Kinect SDK. 
+Built using the MS Kinect SDK in a couple of hours, it doesn' do very much but it is fun to play. 
 To play hold out your arms and tilt them as though "flying" (like when playing as a kid) to move the Starfighter-K from left to right.
 Move hands behind you to speed up, move them forwards to slow down.
 You can play using the keyboard if you switch the IFighterController to use the KeyboardController instead of the KinectController.
